@@ -38,15 +38,21 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Swagger is always enabled for API documentation
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookPulse API V1");
+    c.RoutePrefix = "swagger";
+});
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 app.UseAuthorization();
+
+// Root endpoint - redirect to Swagger
+app.MapGet("/", () => Results.Redirect("/swagger"));
+
 app.MapControllers();
 
 // Ensure database is created (for InMemory or initial PostgreSQL setup)
@@ -62,4 +68,5 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
 

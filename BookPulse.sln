@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookPulse", "BookPulse.csproj", "{DACA142B-D52C-4261-8D0E-6133181E736A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookPulse.Tests", "Tests\BookPulse.Tests.csproj", "{7C1606DD-C4E3-498D-B0CF-68DDA86224F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DACA142B-D52C-4261-8D0E-6133181E736A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DACA142B-D52C-4261-8D0E-6133181E736A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DACA142B-D52C-4261-8D0E-6133181E736A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DACA142B-D52C-4261-8D0E-6133181E736A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C1606DD-C4E3-498D-B0CF-68DDA86224F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C1606DD-C4E3-498D-B0CF-68DDA86224F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C1606DD-C4E3-498D-B0CF-68DDA86224F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C1606DD-C4E3-498D-B0CF-68DDA86224F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
