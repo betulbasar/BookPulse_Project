@@ -8,21 +8,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Database configuration
+// Database configuration - PostgreSQL
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 if (string.IsNullOrEmpty(connectionString))
 {
-    // Use InMemory database for testing when no connection string is provided
-    builder.Services.AddDbContext<BookPulseDbContext>(options =>
-        options.UseInMemoryDatabase("BookPulseDb"));
+    throw new InvalidOperationException("Connection string 'DefaultConnection' not found. Please configure PostgreSQL connection string in appsettings.json");
 }
-else
-{
-    // Use PostgreSQL when connection string is provided
-    builder.Services.AddDbContext<BookPulseDbContext>(options =>
-        options.UseNpgsql(connectionString));
-}
+
+builder.Services.AddDbContext<BookPulseDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 // CORS configuration
 builder.Services.AddCors(options =>
@@ -55,17 +50,9 @@ app.MapGet("/", () => Results.Redirect("/swagger"));
 
 app.MapControllers();
 
-// Ensure database is created (for InMemory or initial PostgreSQL setup)
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<BookPulseDbContext>();
-    
-    // For PostgreSQL, use migrations instead
-    if (context.Database.IsInMemory())
-    {
-        context.Database.EnsureCreated();
-    }
-}
+// Note: Use migrations to create/update database schema
+// Run: dotnet ef migrations add InitialCreate
+// Then: dotnet ef database update
 
 app.Run();
 
