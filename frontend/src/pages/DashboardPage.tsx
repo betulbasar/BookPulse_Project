@@ -81,7 +81,7 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card title="Recently Added Books" className="bg-green-50 border-green-200">
+        <Card title="Recently Added Books" className="bg-green-100/80 border-green-200">
           {books && books.length > 0 ? (
             <ul className="space-y-2">
               {books.slice(-5).reverse().map((book) => (
@@ -96,7 +96,7 @@ export default function DashboardPage() {
           )}
         </Card>
 
-        <Card title="Active Loans" className="bg-green-50 border-green-200">
+        <Card title="Active Loans" className="bg-green-100/80 border-green-200">
           {activeLoans.length > 0 ? (
             <ul className="space-y-2">
               {activeLoans.slice(0, 5).map((loan) => (
