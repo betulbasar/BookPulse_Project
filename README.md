@@ -1,6 +1,6 @@
 # BookPulse_Project
 
-BookPulse: a SQL Server–based library management database project.
+BookPulse: A PostgreSQL-based library management system with React frontend.
 
 ## Project Description
 
@@ -85,7 +85,7 @@ Update `appsettings.json` or `appsettings.Development.json`:
 Create and apply migrations:
 
 ```bash
-dotnet ef migrations add InitialCreate   # sadece ilk kurulumda
+dotnet ef migrations add InitialCreate   # only on first setup
 dotnet ef database update
 ```
 
@@ -107,7 +107,7 @@ npm run dev
 
 The React app will be available at `http://localhost:5173`.
 
-> **Not:** Frontend, backend API'ye `http://localhost:5000/api` üzerinden istek atar. Portu değiştirirseniz `frontend/src/services/api.ts` içindeki `baseURL` değerini de güncelleyin.
+> **Note:** The frontend makes API requests to the backend at `http://localhost:5000/api`. If you change the port, update the `baseURL` value in `frontend/src/services/api.ts`.
 
 ### 3. Running Tests (Backend)
 
@@ -151,6 +151,7 @@ When running in Development mode, Swagger UI is available at:
 
 ## Features
 
+### Backend
 - ✅ Code First approach with Entity Framework Core
 - ✅ PostgreSQL support (ready for production)
 - ✅ InMemory database for testing without database setup
@@ -159,6 +160,16 @@ When running in Development mode, Swagger UI is available at:
 - ✅ Rating system with average calculation
 - ✅ Unit tests with xUnit
 - ✅ Swagger/OpenAPI documentation
+
+### Frontend
+- ✅ Modern React + TypeScript UI
+- ✅ Responsive design with Tailwind CSS
+- ✅ Dashboard with statistics and overview
+- ✅ Book management (list, add, search, delete)
+- ✅ Member management (list, add, search, delete)
+- ✅ Loan management (borrow, return, filter)
+- ✅ Form validation with React Hook Form + Zod
+- ✅ Real-time data fetching with TanStack Query
 
 ## Future Enhancements
 
