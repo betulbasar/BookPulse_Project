@@ -9,8 +9,8 @@ import Button from '../common/Button'
 import type { CreateLoanDto } from '../../types/loan'
 
 const loanSchema = z.object({
-  bookId: z.number().min(1, 'Kitap seçiniz'),
-  memberId: z.number().min(1, 'Üye seçiniz'),
+  bookId: z.number().min(1, 'Please select a book'),
+  memberId: z.number().min(1, 'Please select a member'),
   loanDays: z.number().min(1).max(30).default(14),
 })
 
@@ -48,7 +48,7 @@ export default function LoanForm({ onSubmit, onCancel }: LoanFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
-          Kitap
+          Book
         </label>
         <select
           {...register('bookId', { valueAsNumber: true })}
@@ -56,10 +56,10 @@ export default function LoanForm({ onSubmit, onCancel }: LoanFormProps) {
             errors.bookId ? 'border-red-500' : 'border-gray-300'
           }`}
         >
-          <option value="">Kitap seçiniz</option>
+          <option value="">Select a book</option>
           {availableBooks.map((book) => (
             <option key={book.id} value={book.id}>
-              {book.title} - {book.author} ({book.availableCopies} mevcut)
+              {book.title} - {book.author} ({book.availableCopies} available)
             </option>
           ))}
         </select>
@@ -70,7 +70,7 @@ export default function LoanForm({ onSubmit, onCancel }: LoanFormProps) {
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
-          Üye
+          Member
         </label>
         <select
           {...register('memberId', { valueAsNumber: true })}
@@ -78,7 +78,7 @@ export default function LoanForm({ onSubmit, onCancel }: LoanFormProps) {
             errors.memberId ? 'border-red-500' : 'border-gray-300'
           }`}
         >
-          <option value="">Üye seçiniz</option>
+          <option value="">Select a member</option>
           {activeMembers.map((member) => (
             <option key={member.id} value={member.id}>
               {member.firstName} {member.lastName} - {member.email}
@@ -91,7 +91,7 @@ export default function LoanForm({ onSubmit, onCancel }: LoanFormProps) {
       </div>
 
       <Input
-        label="Ödünç Süresi (Gün)"
+        label="Loan Duration (Days)"
         type="number"
         {...register('loanDays', { valueAsNumber: true })}
         error={errors.loanDays?.message}
@@ -100,10 +100,10 @@ export default function LoanForm({ onSubmit, onCancel }: LoanFormProps) {
 
       <div className="flex gap-2 justify-end">
         <Button type="button" variant="secondary" onClick={onCancel}>
-          İptal
+          Cancel
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Kaydediliyor...' : 'Kaydet'}
+          {isSubmitting ? 'Saving...' : 'Save'}
         </Button>
       </div>
     </form>

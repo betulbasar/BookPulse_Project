@@ -11,20 +11,20 @@ export default function Layout({ children }: LayoutProps) {
 
   const navItems = [
     { path: '/', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/books', label: 'Kitaplar', icon: BookOpen },
-    { path: '/members', label: 'Üyeler', icon: Users },
-    { path: '/loans', label: 'Ödünçler', icon: ClipboardList },
+    { path: '/books', label: 'Books', icon: BookOpen },
+    { path: '/members', label: 'Members', icon: Users },
+    { path: '/loans', label: 'Loans', icon: ClipboardList },
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-md">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-50">
+      <nav className="bg-green-100/80 backdrop-blur-sm shadow-lg shadow-pink-100 border-b border-pink-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
-                <BookOpen className="h-8 w-8 text-primary" />
-                <span className="ml-2 text-xl font-bold text-gray-900">
+                <BookOpen className="h-8 w-8 text-pink-600" />
+                <span className="ml-2 text-xl font-bold text-pink-700">
                   BookPulse
                 </span>
               </div>
@@ -36,10 +36,10 @@ export default function Layout({ children }: LayoutProps) {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
+                      className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
                         isActive
-                          ? 'border-primary text-gray-900'
-                          : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                          ? 'border-pink-500 text-pink-700'
+                          : 'border-transparent text-pink-600 hover:text-pink-800 hover:border-pink-300'
                       }`}
                     >
                       <Icon className="h-5 w-5 mr-2" />

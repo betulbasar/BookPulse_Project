@@ -32,7 +32,7 @@ export default function BooksPage() {
   )
 
   const handleDelete = async (id: number) => {
-    if (window.confirm('Bu kitabı silmek istediğinize emin misiniz?')) {
+    if (window.confirm('Are you sure you want to delete this book?')) {
       deleteMutation.mutate(id)
     }
   }
@@ -40,10 +40,10 @@ export default function BooksPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Kitaplar</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Books</h1>
         <Button onClick={() => setIsModalOpen(true)}>
           <Plus className="h-5 w-5 inline mr-2" />
-          Yeni Kitap Ekle
+          Add New Book
         </Button>
       </div>
 
@@ -52,7 +52,7 @@ export default function BooksPage() {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <input
             type="text"
-            placeholder="Kitap veya yazar ara..."
+            placeholder="Search books or authors..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
@@ -61,7 +61,7 @@ export default function BooksPage() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-8">Yükleniyor...</div>
+        <div className="text-center py-8">Loading...</div>
       ) : filteredBooks && filteredBooks.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredBooks.map((book) => (
@@ -80,14 +80,14 @@ export default function BooksPage() {
               )}
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">
-                  {book.availableCopies}/{book.totalCopies} mevcut
+                  {book.availableCopies}/{book.totalCopies} available
                 </span>
                 <Button
                   variant="danger"
                   onClick={() => handleDelete(book.id)}
                   className="text-sm"
                 >
-                  Sil
+                  Delete
                 </Button>
               </div>
             </Card>
@@ -96,7 +96,7 @@ export default function BooksPage() {
       ) : (
         <Card>
           <p className="text-center text-gray-500 py-8">
-            {searchTerm ? 'Arama sonucu bulunamadı' : 'Henüz kitap eklenmemiş'}
+            {searchTerm ? 'No results found' : 'No books added yet'}
           </p>
         </Card>
       )}
@@ -104,7 +104,7 @@ export default function BooksPage() {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Yeni Kitap Ekle"
+        title="Add New Book"
       >
         <BookForm
           onSubmit={async (data: CreateBookDto) => {

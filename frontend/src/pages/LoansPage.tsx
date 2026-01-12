@@ -35,7 +35,7 @@ export default function LoansPage() {
   })
 
   const handleReturn = async (loanId: number) => {
-    if (window.confirm('Kitabı iade etmek istediğinize emin misiniz?')) {
+    if (window.confirm('Are you sure you want to return this book?')) {
       returnMutation.mutate({ loanId })
     }
   }
@@ -43,10 +43,10 @@ export default function LoansPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Ödünçler</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Loans</h1>
         <Button onClick={() => setIsModalOpen(true)}>
           <Plus className="h-5 w-5 inline mr-2" />
-          Yeni Ödünç
+          New Loan
         </Button>
       </div>
 
@@ -55,24 +55,24 @@ export default function LoansPage() {
           variant={filter === 'all' ? 'primary' : 'secondary'}
           onClick={() => setFilter('all')}
         >
-          Tümü
+          All
         </Button>
         <Button
           variant={filter === 'active' ? 'primary' : 'secondary'}
           onClick={() => setFilter('active')}
         >
-          Aktif
+          Active
         </Button>
         <Button
           variant={filter === 'returned' ? 'primary' : 'secondary'}
           onClick={() => setFilter('returned')}
         >
-          İade Edilmiş
+          Returned
         </Button>
       </div>
 
       {isLoading ? (
-        <div className="text-center py-8">Yükleniyor...</div>
+        <div className="text-center py-8">Loading...</div>
       ) : filteredLoans && filteredLoans.length > 0 ? (
         <div className="space-y-4">
           {filteredLoans.map((loan) => (
@@ -82,37 +82,37 @@ export default function LoansPage() {
                   <h3 className="text-xl font-semibold mb-2">
                     {loan.bookTitle}
                   </h3>
-                  <p className="text-gray-600 mb-2">Üye: {loan.memberName}</p>
+                  <p className="text-gray-600 mb-2">Member: {loan.memberName}</p>
                   <div className="flex gap-4 text-sm text-gray-500">
                     <span>
-                      Ödünç: {new Date(loan.loanDate).toLocaleDateString('tr-TR')}
+                      Loaned: {new Date(loan.loanDate).toLocaleDateString('en-US')}
                     </span>
                     <span>
-                      Son Tarih: {new Date(loan.dueDate).toLocaleDateString('tr-TR')}
+                      Due Date: {new Date(loan.dueDate).toLocaleDateString('en-US')}
                     </span>
                     {loan.returnDate && (
                       <span>
-                        İade: {new Date(loan.returnDate).toLocaleDateString('tr-TR')}
+                        Returned: {new Date(loan.returnDate).toLocaleDateString('en-US')}
                       </span>
                     )}
                   </div>
                   {!loan.isReturned && new Date(loan.dueDate) < new Date() && (
                     <span className="inline-block mt-2 text-sm text-red-600 font-medium">
-                      ⚠️ Gecikmiş
+                      ⚠️ Overdue
                     </span>
                   )}
                 </div>
                 <div>
                   {loan.isReturned ? (
                     <span className="text-sm bg-green-100 text-green-800 px-3 py-1 rounded">
-                      İade Edildi
+                      Returned
                     </span>
                   ) : (
                     <Button
                       variant="success"
                       onClick={() => handleReturn(loan.id)}
                     >
-                      İade Et
+                      Return
                     </Button>
                   )}
                 </div>
@@ -124,10 +124,10 @@ export default function LoansPage() {
         <Card>
           <p className="text-center text-gray-500 py-8">
             {filter === 'active'
-              ? 'Aktif ödünç yok'
+              ? 'No active loans'
               : filter === 'returned'
-              ? 'İade edilmiş ödünç yok'
-              : 'Henüz ödünç kaydı yok'}
+              ? 'No returned loans'
+              : 'No loans yet'}
           </p>
         </Card>
       )}
@@ -135,7 +135,7 @@ export default function LoansPage() {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Yeni Ödünç"
+        title="New Loan"
       >
         <LoanForm
           onSubmit={async (data: CreateLoanDto) => {

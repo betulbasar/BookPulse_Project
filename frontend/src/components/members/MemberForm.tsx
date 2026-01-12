@@ -6,9 +6,9 @@ import Button from '../common/Button'
 import type { CreateMemberDto } from '../../types/member'
 
 const memberSchema = z.object({
-  firstName: z.string().min(1, 'Ad gereklidir'),
-  lastName: z.string().min(1, 'Soyad gereklidir'),
-  email: z.string().email('Geçerli bir email adresi giriniz'),
+  firstName: z.string().min(1, 'First name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
+  email: z.string().email('Please enter a valid email address'),
   phoneNumber: z.string().optional(),
 })
 
@@ -29,12 +29,12 @@ export default function MemberForm({ onSubmit, onCancel }: MemberFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <Input
-        label="Ad"
+        label="First Name"
         {...register('firstName')}
         error={errors.firstName?.message}
       />
       <Input
-        label="Soyad"
+        label="Last Name"
         {...register('lastName')}
         error={errors.lastName?.message}
       />
@@ -45,16 +45,16 @@ export default function MemberForm({ onSubmit, onCancel }: MemberFormProps) {
         error={errors.email?.message}
       />
       <Input
-        label="Telefon (Opsiyonel)"
+        label="Phone (Optional)"
         {...register('phoneNumber')}
         error={errors.phoneNumber?.message}
       />
       <div className="flex gap-2 justify-end">
         <Button type="button" variant="secondary" onClick={onCancel}>
-          İptal
+          Cancel
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Kaydediliyor...' : 'Kaydet'}
+          {isSubmitting ? 'Saving...' : 'Save'}
         </Button>
       </div>
     </form>

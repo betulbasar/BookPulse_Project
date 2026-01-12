@@ -6,10 +6,10 @@ import Button from '../common/Button'
 import type { CreateBookDto } from '../../types/book'
 
 const bookSchema = z.object({
-  title: z.string().min(1, 'Başlık gereklidir'),
-  author: z.string().min(1, 'Yazar gereklidir'),
+  title: z.string().min(1, 'Title is required'),
+  author: z.string().min(1, 'Author is required'),
   isbn: z.string().optional(),
-  totalCopies: z.number().min(1, 'En az 1 kopya olmalıdır'),
+  totalCopies: z.number().min(1, 'At least 1 copy is required'),
 })
 
 interface BookFormProps {
@@ -29,32 +29,32 @@ export default function BookForm({ onSubmit, onCancel }: BookFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <Input
-        label="Kitap Başlığı"
+        label="Book Title"
         {...register('title')}
         error={errors.title?.message}
       />
       <Input
-        label="Yazar"
+        label="Author"
         {...register('author')}
         error={errors.author?.message}
       />
       <Input
-        label="ISBN (Opsiyonel)"
+        label="ISBN (Optional)"
         {...register('isbn')}
         error={errors.isbn?.message}
       />
       <Input
-        label="Toplam Kopya Sayısı"
+        label="Total Copies"
         type="number"
         {...register('totalCopies', { valueAsNumber: true })}
         error={errors.totalCopies?.message}
       />
       <div className="flex gap-2 justify-end">
         <Button type="button" variant="secondary" onClick={onCancel}>
-          İptal
+          Cancel
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Kaydediliyor...' : 'Kaydet'}
+          {isSubmitting ? 'Saving...' : 'Save'}
         </Button>
       </div>
     </form>

@@ -14,7 +14,7 @@ export default function Button({
   const baseStyles = 'px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
   
   const variants = {
-    primary: 'bg-primary text-white hover:bg-blue-600',
+    primary: 'bg-green-300 text-green-800 hover:bg-green-400',
     secondary: 'bg-secondary text-white hover:bg-slate-600',
     danger: 'bg-danger text-white hover:bg-red-600',
     success: 'bg-success text-white hover:bg-green-600',

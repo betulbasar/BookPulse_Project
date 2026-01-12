@@ -34,7 +34,7 @@ export default function MembersPage() {
   )
 
   const handleDelete = async (id: number) => {
-    if (window.confirm('Bu üyeyi silmek istediğinize emin misiniz?')) {
+    if (window.confirm('Are you sure you want to delete this member?')) {
       deleteMutation.mutate(id)
     }
   }
@@ -42,10 +42,10 @@ export default function MembersPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Üyeler</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Members</h1>
         <Button onClick={() => setIsModalOpen(true)}>
           <Plus className="h-5 w-5 inline mr-2" />
-          Yeni Üye Ekle
+          Add New Member
         </Button>
       </div>
 
@@ -54,7 +54,7 @@ export default function MembersPage() {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <input
             type="text"
-            placeholder="Üye ara..."
+            placeholder="Search members..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
@@ -63,7 +63,7 @@ export default function MembersPage() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-8">Yükleniyor...</div>
+        <div className="text-center py-8">Loading...</div>
       ) : filteredMembers && filteredMembers.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredMembers.map((member) => (
@@ -74,11 +74,11 @@ export default function MembersPage() {
                 </h3>
                 {member.isActive ? (
                   <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
-                    Aktif
+                    Active
                   </span>
                 ) : (
                   <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">
-                    Pasif
+                    Inactive
                   </span>
                 )}
               </div>
@@ -89,14 +89,14 @@ export default function MembersPage() {
                 </p>
               )}
               <p className="text-xs text-gray-400 mb-4">
-                Kayıt: {new Date(member.registrationDate).toLocaleDateString('tr-TR')}
+                Registered: {new Date(member.registrationDate).toLocaleDateString('en-US')}
               </p>
               <Button
                 variant="danger"
                 onClick={() => handleDelete(member.id)}
                 className="w-full text-sm"
               >
-                Sil
+                Delete
               </Button>
             </Card>
           ))}
@@ -104,7 +104,7 @@ export default function MembersPage() {
       ) : (
         <Card>
           <p className="text-center text-gray-500 py-8">
-            {searchTerm ? 'Arama sonucu bulunamadı' : 'Henüz üye eklenmemiş'}
+            {searchTerm ? 'No results found' : 'No members added yet'}
           </p>
         </Card>
       )}
@@ -112,7 +112,7 @@ export default function MembersPage() {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Yeni Üye Ekle"
+        title="Add New Member"
       >
         <MemberForm
           onSubmit={async (data: CreateMemberDto) => {
