@@ -10,11 +10,20 @@ Main entities include Books, Members, Loans, and Ratings. The project demonstrat
 
 ## Technology Stack
 
-- **.NET 8.0**
-- **ASP.NET Core Web API**
-- **Entity Framework Core** (Code First approach)
-- **PostgreSQL** (production) / **InMemory** (testing)
-- **xUnit** (testing)
+- **Backend**
+  - **.NET 8.0**
+  - **ASP.NET Core Web API**
+  - **Entity Framework Core** (Code First approach)
+  - **PostgreSQL** (production) / **InMemory** (testing)
+  - **xUnit** (testing)
+- **Frontend**
+  - **React 18 + TypeScript**
+  - **Vite**
+  - **React Router**
+  - **TanStack Query (React Query)**
+  - **Axios**
+  - **React Hook Form + Zod**
+  - **Tailwind CSS**
 
 ## Project Structure
 
@@ -25,47 +34,45 @@ BookPulse_Project/
 │   ├── MembersController.cs
 │   ├── LoansController.cs
 │   └── RatingsController.cs
-├── Models/              # Entity Models
+├── Models/               # Entity Models
 │   ├── Book.cs
 │   ├── Member.cs
 │   ├── Loan.cs
 │   └── Rating.cs
-├── Data/                # DbContext
+├── Data/                 # DbContext
 │   └── BookPulseDbContext.cs
-├── DTOs/                # Data Transfer Objects
+├── DTOs/                 # Data Transfer Objects
 │   ├── BookDto.cs
 │   ├── MemberDto.cs
 │   ├── LoanDto.cs
 │   └── RatingDto.cs
-└── Tests/               # Unit Tests
+├── frontend/             # React + TypeScript frontend
+│   ├── src/
+│   │   ├── components/   # UI components (common, books, members, loans)
+│   │   ├── pages/        # Pages (Dashboard, Books, Members, Loans)
+│   │   ├── services/     # API service wrappers (Axios)
+│   │   ├── types/        # Shared TypeScript types (Book, Member, Loan, Rating)
+│   │   └── index.css     # Global styles (Tailwind CSS)
+│   └── vite.config.ts    # Vite config + dev server
+└── Tests/                # Unit Tests
     └── Unit/
         ├── BooksControllerTests.cs
         └── LoansControllerTests.cs
 ```
 
-## Setup Instructions
+## Setup Instructions (Backend + Frontend)
 
-### 1. Restore Dependencies
+### 1. Backend Setup
+
+#### 1.1 Restore Dependencies
 
 ```bash
 dotnet restore
 ```
 
-### 2. Testing Without Database (InMemory)
+#### 1.2 Configure PostgreSQL
 
-The project is configured to use InMemory database by default when no connection string is provided. You can test the application immediately:
-
-```bash
-dotnet run
-```
-
-The API will be available at `https://localhost:5001` or `http://localhost:5000`
-
-### 3. Connect to PostgreSQL
-
-When you're ready to connect to PostgreSQL:
-
-1. Update `appsettings.json` or `appsettings.Development.json`:
+Update `appsettings.json` or `appsettings.Development.json`:
 
 ```json
 {
@@ -75,25 +82,34 @@ When you're ready to connect to PostgreSQL:
 }
 ```
 
-2. Create initial migration:
+Create and apply migrations:
 
 ```bash
-dotnet ef migrations add InitialCreate
-```
-
-3. Apply migration to database:
-
-```bash
+dotnet ef migrations add InitialCreate   # sadece ilk kurulumda
 dotnet ef database update
 ```
 
-4. Run the application:
+#### 1.3 Run Backend
 
 ```bash
 dotnet run
 ```
 
-### 4. Running Tests
+The API will be available at `http://localhost:5000` and Swagger UI at `http://localhost:5000/swagger`.
+
+### 2. Frontend Setup (`frontend/`)
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The React app will be available at `http://localhost:5173`.
+
+> **Not:** Frontend, backend API'ye `http://localhost:5000/api` üzerinden istek atar. Portu değiştirirseniz `frontend/src/services/api.ts` içindeki `baseURL` değerini de güncelleyin.
+
+### 3. Running Tests (Backend)
 
 ```bash
 cd Tests
