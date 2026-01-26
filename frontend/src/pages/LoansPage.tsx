@@ -7,8 +7,8 @@ import Card from '../components/common/Card'
 import Button from '../components/common/Button'
 import Modal from '../components/common/Modal'
 import LoanForm from '../components/loans/LoanForm'
-import { Plus, Search } from 'lucide-react'
-import type { CreateLoanDto, ReturnLoanDto } from '../types/loan'
+import { Plus } from 'lucide-react'
+import type { CreateLoanDto } from '../types/loan'
 
 export default function LoansPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -43,7 +43,7 @@ export default function LoansPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Loans</h1>
+        <h1 className="text-3xl font-bold text-pink-800 dark:text-pink-200">Loans</h1>
         <Button onClick={() => setIsModalOpen(true)}>
           <Plus className="h-5 w-5 inline mr-2" />
           New Loan
@@ -72,18 +72,18 @@ export default function LoansPage() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-8">Loading...</div>
+        <div className="text-center py-8 text-gray-600 dark:text-gray-400">Loading...</div>
       ) : filteredLoans && filteredLoans.length > 0 ? (
         <div className="space-y-4">
           {filteredLoans.map((loan) => (
             <Card key={loan.id}>
               <div className="flex justify-between items-start">
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2">
+                  <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">
                     {loan.bookTitle}
                   </h3>
-                  <p className="text-gray-600 mb-2">Member: {loan.memberName}</p>
-                  <div className="flex gap-4 text-sm text-gray-500">
+                  <p className="text-gray-600 dark:text-gray-300 mb-2">Member: {loan.memberName}</p>
+                  <div className="flex gap-4 text-sm text-gray-500 dark:text-gray-400">
                     <span>
                       Loaned: {new Date(loan.loanDate).toLocaleDateString('en-US')}
                     </span>
@@ -97,14 +97,14 @@ export default function LoansPage() {
                     )}
                   </div>
                   {!loan.isReturned && new Date(loan.dueDate) < new Date() && (
-                    <span className="inline-block mt-2 text-sm text-red-600 font-medium">
+                    <span className="inline-block mt-2 text-sm text-red-600 dark:text-red-400 font-medium">
                       ⚠️ Overdue
                     </span>
                   )}
                 </div>
                 <div>
                   {loan.isReturned ? (
-                    <span className="text-sm bg-green-100 text-green-800 px-3 py-1 rounded">
+                    <span className="text-sm bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-3 py-1 rounded">
                       Returned
                     </span>
                   ) : (
@@ -122,7 +122,7 @@ export default function LoansPage() {
         </div>
       ) : (
         <Card>
-          <p className="text-center text-gray-500 py-8">
+          <p className="text-center text-gray-500 dark:text-gray-400 py-8">
             {filter === 'active'
               ? 'No active loans'
               : filter === 'returned'

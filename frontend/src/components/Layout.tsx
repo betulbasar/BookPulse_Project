@@ -17,14 +17,14 @@ export default function Layout({ children }: LayoutProps) {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-50">
-      <nav className="bg-green-100/80 backdrop-blur-sm shadow-lg shadow-pink-100 border-b border-pink-200">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-200">
+      <nav className="bg-green-100/80 dark:bg-gray-800/90 backdrop-blur-sm shadow-lg shadow-pink-100 dark:shadow-gray-900 border-b border-pink-200 dark:border-gray-700 transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
-                <BookOpen className="h-8 w-8 text-pink-600" />
-                <span className="ml-2 text-xl font-bold text-pink-700">
+                <BookOpen className="h-8 w-8 text-pink-600 dark:text-pink-400" />
+                <span className="ml-2 text-xl font-bold text-pink-700 dark:text-pink-300">
                   BookPulse
                 </span>
               </div>
@@ -38,8 +38,8 @@ export default function Layout({ children }: LayoutProps) {
                       to={item.path}
                       className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
                         isActive
-                          ? 'border-pink-500 text-pink-700'
-                          : 'border-transparent text-pink-600 hover:text-pink-800 hover:border-pink-300'
+                          ? 'border-pink-500 text-pink-700 dark:border-pink-400 dark:text-pink-300'
+                          : 'border-transparent text-pink-600 dark:text-pink-400 hover:text-pink-800 dark:hover:text-pink-200 hover:border-pink-300 dark:hover:border-pink-500'
                       }`}
                     >
                       <Icon className="h-5 w-5 mr-2" />

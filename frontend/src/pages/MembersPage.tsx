@@ -42,7 +42,7 @@ export default function MembersPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Members</h1>
+        <h1 className="text-3xl font-bold text-pink-800 dark:text-pink-200">Members</h1>
         <Button onClick={() => setIsModalOpen(true)}>
           <Plus className="h-5 w-5 inline mr-2" />
           Add New Member
@@ -51,44 +51,44 @@ export default function MembersPage() {
 
       <div className="mb-4">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 h-5 w-5" />
           <input
             type="text"
             placeholder="Search members..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
           />
         </div>
       </div>
 
       {isLoading ? (
-        <div className="text-center py-8">Loading...</div>
+        <div className="text-center py-8 text-gray-600 dark:text-gray-400">Loading...</div>
       ) : filteredMembers && filteredMembers.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredMembers.map((member) => (
             <Card key={member.id}>
               <div className="flex justify-between items-start mb-2">
-                <h3 className="text-xl font-semibold">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                   {member.firstName} {member.lastName}
                 </h3>
                 {member.isActive ? (
-                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                  <span className="text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-2 py-1 rounded">
                     Active
                   </span>
                 ) : (
-                  <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">
+                  <span className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded">
                     Inactive
                   </span>
                 )}
               </div>
-              <p className="text-gray-600 mb-1">{member.email}</p>
+              <p className="text-gray-600 dark:text-gray-300 mb-1">{member.email}</p>
               {member.phoneNumber && (
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
                   {member.phoneNumber}
                 </p>
               )}
-              <p className="text-xs text-gray-400 mb-4">
+              <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
                 Registered: {new Date(member.registrationDate).toLocaleDateString('en-US')}
               </p>
               <Button
@@ -103,7 +103,7 @@ export default function MembersPage() {
         </div>
       ) : (
         <Card>
-          <p className="text-center text-gray-500 py-8">
+          <p className="text-center text-gray-500 dark:text-gray-400 py-8">
             {searchTerm ? 'No results found' : 'No members added yet'}
           </p>
         </Card>
